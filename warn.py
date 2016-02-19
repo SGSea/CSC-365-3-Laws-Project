@@ -31,6 +31,7 @@ if not isHuman:
 		talker.say('New object detected!')
 		print "Identified object"
 		#have robot report to Master
+talker.runAndWait()
 
 #while not rospy.is_shutdown():
 #	rate.sleep()
