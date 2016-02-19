@@ -6,6 +6,9 @@ This repository contains the lab directions and our solutions for **CSC-356:** *
 
 ### References
 http://wiki.ros.org/cob_people_detection
+http://wiki.ros.org/speech_database
+http://wiki.ros.org/turtlebot_panorama
+http://wiki.ros.org/smach
 
 ### Contributors
 + Sam Caldwell
