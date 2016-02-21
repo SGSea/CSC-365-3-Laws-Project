@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 
-#import rospy
+import rospy
+from std_msgs.msg import String
 import std_msgs
 import pyttsx
 
@@ -12,27 +13,39 @@ isSam = False
 isRollin = False
 isHuman = False
 isMoving = False
+react = "reacting"
 #The following if loop should be initiated after an intruder is detected
 if isHuman:
 	if isShannon or isAkash or isSam or isRollin:
 		isAuthorized = true
 	if isAuthorized:
-		talker.say('Hello,Master! Welcome back.')
-		print "Welcomed Master"
+		react = "Hello, Master! Welcome back."
 	if not isAuthorized:
-		talker.say('You do not have clearance to enter this space. Your presence has been noted and reported. Leave')
-		print "Warned human intruder"
+		react = "You do not have clearance to be here. Leave"
 if not isHuman:
 	if isMoving:
-		talker.say('Leave or be neutralized')
-		print "Warned intruder"
+		react = "Leave or be neutralized"
 		#the robot should the attack
 	if not isMoving:
-		talker.say('New object detected!')
-		print "Identified object"
+		react = "A new object has been detected"
 		#have robot report to Master
+print react
+talker.say(react)
 talker.runAndWait()
 
-#while not rospy.is_shutdown():
-#	rate.sleep()
-		
+rospy.init_node('reaction_publisher')
+pub = rospy.Publisher('reactions', String, queue_size=30)
+rate = rospy.Rate(2)
+
+while not rospy.is_shutdown():
+	rospy.loginfo(react)
+	pub.publish(react)
+	rate.sleep()
+
+#def loop(self)
+#	self.talker.startLoop(False)
+#	while not rospy.is_shutdown():
+#		self.talker.iterate()
+#		time.sleep(0.1)
+#	self.talker.endLoop()
+
