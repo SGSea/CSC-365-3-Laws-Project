@@ -2,15 +2,20 @@
 import rospy
 from geometry_msgs.msg import Twist
 from sensor_msgs.msg import LaserScan
+import math
+
+# Every Python Controller needs these lines
+import roslib; roslib.load_manifest('project1')
+
 class Scan_msg:
 
 	def __init__(self):
-	'''Initializes an object of this class.
-	The constructor creates a publisher, a twist message.
-	3 integer variables are created to keep track of where obstacles exist.
-	3 dictionaries are to keep track of the movement and log messages.'''
+	#'''Initializes an object of this class.
+	#The constructor creates a publisher, a twist message.
+	#3 integer variables are created to keep track of where obstacles exist.
+	#3 dictionaries are to keep track of the movement and log messages.'''
 
-		self.pub = rospy.Publisher('/cmd_vel_mux/input/navi',Twist)
+		self.pub = rospy.Publisher('mobile_base/commands/velocity',Twist)
 		self.msg = Twist()
 		self.sect_1 = 0
 		self.sect_2 = 0
@@ -32,9 +37,11 @@ class Scan_msg:
 		or '1' (obstacles within 0.7 m)
 
 		Parameter laserscan is a laserscan message.'''
+		#no_nans = [n for n in data.ranges if not math.isnan(n)]
 		entries = len(laserscan.ranges)
 		for entry in range(0,entries):
 			if 0.4 < laserscan.ranges[entry] < 0.75:
+				
 				self.sect_1 = 1 if (0 < entry < entries/3) else 0
 				self.sect_2 = 1 if (entries/3 < entry < entries/2) else 0
 				self.sect_3 = 1 if (entries/2 < entry < entries) else 0
@@ -55,6 +62,29 @@ class Scan_msg:
 		self.pub.publish(self.msg)
 
 		self.reset_sect()
+	
+	def bumper_event_callback(self, msg):
+		"""Checks to see if the bumper has been pressed, if so the robot will then
+		back up and turn in a random direction."""
+		k = 0
+		if msg.state == BumperEvent.PRESSED:	
+			for k in range(0, 4999):
+				self.msg.angular.z = 0
+				self.msg.linear.x = -0.1
+				self.pub.publish(self.msg)
+				k = k + 1
+
+			k = 0
+			crosscounter = randint(5000,50000)
+			orientation = randint(-1,1)
+			for orientation in range (0, 0):
+				orientation = randint(-1,1)
+
+			for k in range(0, crosscounter):
+				self.msg.angular.z = orientation
+				self.msg.linear.x = 0
+				self.pub.publish(self.msg)
+				k = k + 1
 
 	def for_callback(self,laserscan):
 		'''Passes laserscan onto function sort which gives the sect
