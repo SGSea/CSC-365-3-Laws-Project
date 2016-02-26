@@ -1,5 +1,6 @@
 <launch>
 
    <node name="wander" pkg="gaurdbot" type="wander.py"></node>
+   <node name="react" pkg="gaurdbot" type="warnWithSubscriber.py"></node>
 
 </launch>
