@@ -1,0 +1,14 @@
+<launch>
+  <include file="$(find facedetector)/launch/facedetector.launch">
+	<arg name="image_topic" value="/camera/rgb/image_color" />
+  </include>
+
+  <include file="$(find facedetector)/launch/facevisualizer.launch" />
+
+  <node name="navigation_sensors" pkg="gaurdbot" type="falafel.py"></node>
+
+  <node name="speaker" pkg="gaurdbot" type="speech.py"></node>
+
+  <node name="pi" pkg="gaurdbot" type="warn.py"></node>
+
+</launch>
