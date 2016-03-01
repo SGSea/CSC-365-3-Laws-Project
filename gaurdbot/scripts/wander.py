@@ -16,7 +16,7 @@ class Scan_msg:
 	#3 integer variables are created to keep track of where obstacles exist.
 	#3 dictionaries are to keep track of the movement and log messages.'''
 
-		self.pub = rospy.Publisher('mobile_base/commands/velocity',Twist)
+		self.pub = rospy.Publisher('mobile_base/commands/velocity',Twist, queue_size=2)
 		self.msg = Twist()
 		self.sect_1 = 0
 		self.sect_2 = 0
