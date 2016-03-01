@@ -53,6 +53,8 @@ if rospy.get_param('notice'):
 #creates a publisher with updates on the node's status
 rospy.init_node('reaction_publisher')
 pubReactions = rospy.Publisher('reactions', String, queue_size=1)
+talker.say(react)
+talker.runAndWait()
 rate = rospy.Rate(1)
 
 while not rospy.is_shutdown():
