@@ -65,7 +65,9 @@ def callback(data):
 	rospy.loginfo("I heard ", data.data)
 	print data.data
 def listener():
-	rospy.init_node('detect_listener')
-	sub = rospy.Subscriber('testPub', String, callback)
-	message = data.string
+	rospy.init_node('face_detector/people_tracker_measurements')
+	sub = rospy.Subscriber('face_detector/people_tracker_measurements', String, callback)
+	if sub:
+		rospy.set_param('notice', True)
+		rospy.set_param('isHuman', True)
 	rospy.spin()
