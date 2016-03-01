@@ -1,0 +1,12 @@
+<launch>
+  <include file="$(find facedetector)/launch/facedetector.launch">
+	<arg name="image_topic" value="/camera/rgb/image_color" />
+  </include>
+
+  <include file="$(find facedetector)/launch/facevisualizer.launch" />
+
+  <node name="pita" pkg="gaurdbot" type="pita.py"></node>
+
+  <node name="pi" pkg="gaurdbot" type="warn.py"></node>
+
+</launch>
