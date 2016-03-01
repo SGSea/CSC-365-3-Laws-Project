@@ -22,7 +22,7 @@ isAuthorized = False
 react = "reacting"
 oldReaction = react
 statement = "Initialized"
-listener()
+#listener()
 
 #The following if loop should be initiated after an intruder is detected
 if rospy.get_param('notice'):
@@ -74,4 +74,16 @@ def listener():
 		rospy.set_param('notice', True)
 		rospy.set_param('isHuman', True)
 	rospy.spin()
+def listener():
+	'''Initializes node, creates subscriber, and states callback
+	function.'''
+	rospy.init_node('navigation_sensors')
+	rospy.loginfo("Subscriber Starting")
+	sub = rospy.Subscriber('/scan', LaserScan, call_back)
+	rospy.spin()
 
+if __name__ == "__main__":
+	'''A Scan_msg class object called sub_obj is created and listener
+	function is run'''
+	sub_obj = Scan_msg()
+	listener()
