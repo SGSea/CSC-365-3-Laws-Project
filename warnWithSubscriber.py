@@ -22,6 +22,7 @@ isAuthorized = False
 react = "reacting"
 oldReaction = react
 statement = "Initialized"
+listener()
 
 #The following if loop should be initiated after an intruder is detected
 if rospy.get_param('notice'):
@@ -73,3 +74,4 @@ def listener():
 		rospy.set_param('notice', True)
 		rospy.set_param('isHuman', True)
 	rospy.spin()
+
