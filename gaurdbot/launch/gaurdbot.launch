@@ -1,5 +1,14 @@
 <launch>
 
-   <node name="wander" pkg="gaurdbot" type="wander.py"></node>
+<node name="wander" pkg="gaurdbot" type="wander.py"></node>
+<node name="warn" pkg="gaurdbot" type="warn.py" />
+  
+<param name ="notice" value ="False" type="boolean" />
+<param name ="isHuman" value ="False" type="boolean" />
+<param name ="isAkash" value ="False" type="boolean" />
+<param name ="isRollin" value ="False" type="boolean" />
+<param name ="isSam" value ="False" type="boolean" />
+<param name ="isShannon" value ="False" type="boolean" />
+<param name ="isMoving" value ="False" type="boolean" />
 
 </launch>
