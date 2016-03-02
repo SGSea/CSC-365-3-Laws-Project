@@ -1,4 +1,4 @@
-# (Fill name here)
+# Patrol Bot
 The basic idea behind this project is to create a Patrol Bot (modified TurtleBot) which detects people with its kinekt sensor and interacts with a master, alerting it about the presence of the intruder in the pre-designated area.
 
 ### Course Description
