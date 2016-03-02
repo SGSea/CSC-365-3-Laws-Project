@@ -1,9 +1,10 @@
 <launch>
 
   <node name="motion" pkg="motion" type="motion.py">
-  
 
-	<remap from="cmd_vel" to="cmd_vel_mux/input/teleop"/>
+  </node>
+  
+  <node name="find_object_2d" pkg="find_object_2d" type="find_object_2d">
 
   </node>
   
