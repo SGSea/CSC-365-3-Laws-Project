@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 '''Base code provided by I Heart Robotics, modified by Peter Tran, and additional modifications  by Sam Caldwell and
 Shannon Ehrnstein. It now includes a face detector using ROS_people, and object tracking through Rollin Tschirgi's code. The code 
-also attempts to speak using pyttsx and warn any intruders of their intrusion.
+also attempts to speak using pyttsx and warn any intruders of their intrusion.'''
 import rospy
 from geometry_msgs.msg import Twist
 from sensor_msgs.msg import LaserScan
