@@ -10,6 +10,7 @@ http://wiki.ros.org/speech_database
 http://wiki.ros.org/turtlebot_panorama  
 http://wiki.ros.org/smach  
 http://wiki.ros.org/face_detector  
+https://github.com/introlab/find-object
 
 ### Contributors
 + Sam Caldwell
