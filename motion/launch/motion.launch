@@ -1,0 +1,12 @@
+<launch>
+
+  <node name="motion" pkg="motion" type="motion.py">
+  
+
+	<remap from="cmd_vel" to="cmd_vel_mux/input/teleop"/>
+
+  </node>
+  
+
+</launch>
+
