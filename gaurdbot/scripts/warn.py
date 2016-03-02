@@ -22,6 +22,7 @@ isAuthorized = False
 react = "reacting"
 oldReaction = react
 statement = "Initialized"
+#listener()
 
 #The following if loop should be initiated after an intruder is detected
 if rospy.get_param('notice'):
@@ -53,9 +54,36 @@ if rospy.get_param('notice'):
 #creates a publisher with updates on the node's status
 rospy.init_node('reaction_publisher')
 pubReactions = rospy.Publisher('reactions', String, queue_size=1)
+talker.say(react)
+talker.runAndWait()
 rate = rospy.Rate(1)
 
 while not rospy.is_shutdown():
 	rospy.loginfo(react + "..." + statement)
 	pubReactions.publish(react + "..." + statement)
 	rate.sleep()
+
+   # A subscriber, which will take data from Rollin's publisher when done
+def callback(data):
+	rospy.loginfo("I heard ", data.data)
+	print data.data
+def listener():
+	rospy.init_node('face_detector/people_tracker_measurements')
+	sub = rospy.Subscriber('face_detector/people_tracker_measurements', String, callback)
+	if sub:
+		rospy.set_param('notice', True)
+		rospy.set_param('isHuman', True)
+	rospy.spin()
+def listener():
+	'''Initializes node, creates subscriber, and states callback
+	function.'''
+	rospy.init_node('navigation_sensors')
+	rospy.loginfo("Subscriber Starting")
+	sub = rospy.Subscriber('/scan', LaserScan, call_back)
+	rospy.spin()
+
+if __name__ == "__main__":
+	'''A Scan_msg class object called sub_obj is created and listener
+	function is run'''
+	sub_obj = Scan_msg()
+	listener()
